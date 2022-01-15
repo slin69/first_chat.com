@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <div class="whole">
+   <head><title >Hello world</title></head>
+   <h1 id="head">hi</h1>
+   <h1 id="users_online">users online: </h1>
+   <body>
+       <ul style="border:solid 1px;height:400px; width:400px;overflow:hidden;overflow-y:scroll;" id="chat_list">
+
+       </ul>
+       <input id="input">
+       <button  id="send" onclick="send()" type="button" placeholder="send">send</button>
+   </body>
+</div>
+   <script src="/socket.io/socket.io.js"></script>
+   <script>
+      var socket = io('ws://localhost:8080');
+      socket.emit('hello')
+      socket.on("message",text=>{
+        var users_online=document.getElementById("users_online");
+        var ol=document.getElementById("chat_list");
+        var node = document.createElement('h2');
+        node.innerHTML=`${text['username']}: ${text["message"]}`;
+        ol.appendChild(node);
+        users_online.innerHTML=`user online: ${text["users"]}`
+        console.log(text)
+      });
+      var username=prompt("username");
+      var head=document.getElementById("head");
+      head.innerHTML = `username: ${username}`;
+      
+      //socket.emit("message","hello")
+      function send(){
+          var input=document.getElementById("input").value;
+          
+          let msg={
+              "message":input,
+              "username":username
+          }
+          console.log(msg["username"]);
+          socket.emit("message",msg)
+      }
+
+
+   </script>
+<style>
+    .whole{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width:"400px;";
+        height:"300px";
+        transform: translate(-50%, -50%);
+    }
+</style>
+</html>
