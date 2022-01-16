@@ -27,11 +27,15 @@ io.on("connection",function(socket){
         }
         console.log(JSON.stringify(msg['users']))
         io.emit('message',msg);
+        
   
     });
-    socket.on("number_users",(number)=>{
-        io.emit('message',users_id.size);
-    });
+    msg={
+        "users":users_id.size,
+        "username":"user",
+        "message":"connected"
+    }
+    io.emit("message",msg)
     function arrayRemove(arr, value) { 
     
         return arr.filter(function(ele){ 
@@ -46,7 +50,9 @@ io.on("connection",function(socket){
         users_id.delete(socket)
         console.log(users_id.size)
         msg={
-            "users":users.size
+            "users":users.size,
+            "username":"user",
+            "message": "disconnected"
         }
         io.emit("message",msg)
         var users_l=Array.from(users)
