@@ -14,7 +14,7 @@
 </div>
    <script src="/socket.io/socket.io.js"></script>
    <script>
-      var socket = io('ws://localhost:8000');
+      var socket = io();
       socket.emit('hello')
       socket.on("message",text=>{
         var users_online=document.getElementById("users_online");

@@ -3,6 +3,7 @@ var io = require('socket.io')(http);
 var prompt = require('prompt');
 var name="none"
 prompt.start();
+const port=process.env.PORT || 3000;
 var users=new Set();
 var users_id=new Set();
 app.get("/",function(req,res) {
@@ -55,7 +56,7 @@ io.on("connection",function(socket){
     });
 });
 
-http.listen(8000,function(){
+http.listen(port,function(){
     console.log("waiting for users to join");
 
 });
