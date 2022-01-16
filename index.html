@@ -17,13 +17,19 @@
       var socket = io();
       socket.emit('hello')
       socket.on("message",text=>{
-        var users_online=document.getElementById("users_online");
+        
         var ol=document.getElementById("chat_list");
         var node = document.createElement('h2');
         node.innerHTML=`${text['username']}: ${text["message"]}`;
         ol.appendChild(node);
-        users_online.innerHTML=`user online: ${text["users"]}`
+        
         console.log(text)
+      });
+      socket.on("number_users",text=>{
+        var users_online=document.getElementById("users_online");
+
+        users_online.innerHTML=`user online: ${text}`
+
       });
       var username=prompt("username");
       var head=document.getElementById("head");

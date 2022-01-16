@@ -29,6 +29,9 @@ io.on("connection",function(socket){
         io.emit('message',msg);
   
     });
+    socket.on("number_users",(number)=>{
+        io.emit('message',users_id.size);
+    });
     function arrayRemove(arr, value) { 
     
         return arr.filter(function(ele){ 
