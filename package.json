@@ -1,7 +1,9 @@
 {
   "dependencies": {
+    "express": "^4.17.2",
     "prompt": "*",
     "save": "*",
+    "socket.io": "^4.4.1",
     "socketio": "*"
   }
 }
