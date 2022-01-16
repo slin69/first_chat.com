@@ -55,7 +55,7 @@ io.on("connection",function(socket){
     });
 });
 
-http.listen(8080,function(){
+http.listen(8000,function(){
     console.log("waiting for users to join");
 
 });
