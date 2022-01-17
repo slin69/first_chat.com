@@ -4,14 +4,25 @@
    <head><title >Hello world</title></head>
    <h1 id="head">hi</h1>
    <h1 id="users_online">users online: </h1>
+
+
+
    <body>
        <ul style="border:solid 1px;height:400px; width:400px;overflow:hidden;overflow-y:scroll;" id="chat_list">
 
        </ul>
        <input id="input">
-       <button  id="send" onclick="send()" type="button" placeholder="send">send</button>
+       <button  id="send" type="submit" onclick="send()"placeholder="send">send</button>
+       <div>
+        <a id="smiley" title="smiley" href="#" onclick="enableTxt(this, event)" >&#128515;</a>
+        <a id="sadface" title="sadface" href="#" onclick="enableTxt(this, event)" >&#128530;</a>
+        <a id="laughing" title="laughing" href="#" onclick="enableTxt(this, event)" >&#128514;</a>
+        <a id="devil" title="devil" href="#" onclick="enableTxt(this, event)" >&#128520;</a>
+        <a id="tired" title="tired" href="#" onclick="enableTxt(this, event)" >&#128555;</a>
+     </div>
    </body>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
    <script src="socket.io/socket.io.js"></script>
    <script>
       var socket = io();
@@ -35,15 +46,19 @@
       }
       socket.emit("message",msg)
       function send(){
-          var input=document.getElementById("input").value;
+          var input=document.getElementById("input");
           
           let msg={
-              "message":input,
+              "message":input.value,
               "username":username
           }
           console.log(msg["username"]);
           socket.emit("message",msg)
+          input.value=null;
       }
+      function enableTxt(elem) {
+        document.querySelector('#input').value += elem.textContent;
+    }
 
 
    </script>

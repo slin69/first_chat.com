@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "@joeattardi/emoji-button": "^4.6.2",
+    "emoji-picker-react": "^3.5.0",
+    "emoji-popover": "^1.0.8",
     "express": "^4.17.2",
     "prompt": "*",
     "save": "*",
