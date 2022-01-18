@@ -31,6 +31,23 @@
    <script src="socket.io/socket.io.js"></script>
    <script>
 
+function showfirst(){
+    const notification = new Notification("New message incoming", {
+        body: `hey there lad`,
+        icon: "yourimageurl.png"
+     })
+
+}
+    if (Notification.permission === "granted" && document.hidden==true) {
+        console.log("sdfajklf");
+
+       showfirst();
+    } else if (Notification.permission !== "denied" && document.hidden==true) {
+       Notification.requestPermission().then(permission => {
+          showfirst();
+       });
+    }
+
 
 
       var socket = io();
