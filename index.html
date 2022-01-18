@@ -8,6 +8,7 @@
 
 
    <body>
+       <button id="sound_play"onclick="play()" style="visibility:hidden;"></button>
        <ul style="border:solid 1px;height:400px; width:400px;overflow:hidden;overflow-y:scroll;" id="chat_list">
 
        </ul>
@@ -29,7 +30,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
    <script src="socket.io/socket.io.js"></script>
    <script>
+
+
+
       var socket = io();
+      //var new_message=new Audio("C:\socketio_tutorials\new_message.ogg")
       socket.on("message",text=>{
         users_id=document.getElementById("users_online");
 
@@ -38,9 +43,33 @@
         node.innerHTML=`${text['username']}: ${text["message"]}`;
         ol.appendChild(node);
         users_online.innerHTML=`users online: ${text['users']}`
-        
         console.log(text)
+
+
+
+        function showNotification() {
+            const notification = new Notification("New message incoming", {
+               body: `${text['username']}: ${text["message"]}`,
+               icon: "yourimageurl.png"
+            })
+            notification.onclick = (e) => {
+                window.location.href = "https://google.com";
+             };
+         }
+        if (Notification.permission === "granted" && document.hidden==true) {
+            console.log("sdfajklf");
+
+           showNotification();
+        } else if (Notification.permission !== "denied" && document.hidden==true) {
+           Notification.requestPermission().then(permission => {
+              showNotification();
+           });
+        }
+        //new_message.play();
       });
+      function play(){
+          console.log("button")
+    }
       var username=prompt("username");
       var head=document.getElementById("head");
       head.innerHTML = `username: ${username}`;
